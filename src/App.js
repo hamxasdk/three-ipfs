@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { Model } from "./Components/Model";
+import { Canvas } from "@react-three/fiber";
+// import { Box } from "./components/Box";
+import { OrbitControls, useGLTF } from "@react-three/drei";
+import { Suspense, useState } from "react";
+import { create } from "ipfs-http-client";
+import { FileUpload } from "react-ipfs-uploader";
+window.Buffer = window.Buffer || require("buffer").Buffer;
+const client = create("https://ipfs.infura.io:5001/api/v0");
 function App() {
+  const [fileUrl, setFileUrl] = useState("");
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FileUpload setUrl={setFileUrl} /> {/*ipfs file uploader*/}
+      FileUrl :{" "}
+      <a href={fileUrl} target="_blank" rel="noopener noreferrer">
+        {fileUrl}
+      </a>
     </div>
   );
 }
